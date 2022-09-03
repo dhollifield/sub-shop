@@ -1,0 +1,23 @@
+.bread {
+    background-color: rgb(228, 200, 131);
+    margin: 20px;
+    padding: 10px;
+}
+
+.protein {
+    background-color: rgb(228, 166, 175);
+    margin: 20px;
+    padding: 10px;
+}
+
+.cheese {
+    background-color: rgb(228, 184, 102);
+    margin: 20px;
+    padding: 10px;
+}
+
+.toppings {
+    background-color: rgb(175, 224, 175);
+    margin: 20px;
+    padding: 10px;
+}

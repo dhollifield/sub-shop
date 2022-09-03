@@ -1,5 +1,6 @@
 const orders = []
 
+
 export const getOrders = () => {
     const getOrdersCopy = orders.map(order => ({...order}))
     return getOrdersCopy

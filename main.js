@@ -3,10 +3,10 @@ import {getOrders, addNewOrder} from './orders.js'
 document.getElementById("app").innerHTML = `
 <h1>Deanna's Sub Shop</h1>
 <div>
-  <h3>Please make your sub</h3>
+  <h3>Please make your sub!</h3>
   <div class="subForm">
     <div class="bread">
-      <p>Pick your bread</p>
+      <p><strong>Pick your bread</strong></p>
       <label for="White">White</label>
       <input id="white" name="bread" type="radio" value="White" />
       <label for="Wheat">Wheat</label>
@@ -15,9 +15,14 @@ document.getElementById("app").innerHTML = `
       <input id="low-carb" name="bread" type="radio" value="Low Carb" />
       <label for="Herb and Cheese">Herb & Cheese</label>
       <input id="herb-and-cheese" name="bread" type="radio" value="Herb and Cheese" />
+      <p><trong>Do you want the bread toasted?</strong></p>
+      <label for="Toasted">Toasted</label>
+      <input id="Toasted" name="toasted" type="radio" value="Toasted" />
+      <label for="notToasted">Not Toasted</label>
+      <input id="notToasted" name="toasted" type="radio" value="Not Toasted" checked/>
       </div>
       <div class="protein">
-      <p>Pick your bread</p>
+      <p><strong>Pick your protein</strong></p>
       <label for="Ham">Ham</label>
       <input id="ham" name="protein" type="radio" value="Ham" />
       <label for="Turkey">Turkey</label>
@@ -29,8 +34,21 @@ document.getElementById("app").innerHTML = `
       <label for="Pepperoni">Pepperoni</label>
       <input id="pepperoni" name="protein" type="radio" value="Pepperoni" />
       </div>
+      <div class="cheese">
+      <p><strong>Pick your cheese</strong></p>
+      <label for="American">American</label>
+      <input id="american" name="cheese" type="radio" value="American" />
+      <label for="Cheddar">Cheddar</label>
+      <input id="cheddar" name="cheese" type="radio" value="Cheddar" />
+      <label for="Swiss">Swiss</label>
+      <input id="swiss" name="cheese" type="radio" value="Swiss" />
+      <label for="Pepper Jack">Pepper Jack</label>
+      <input id="pepperJack]" name="cheese" type="radio" value="Pepper Jack" />
+      <label for="No cheese">No cheese</label>
+      <input id="noCheese" name="cheese" type="radio" value="No cheese" checked />
+      </div>
       <div class="toppings">
-        <p>Pick Your Toppings (Select all that apply)</p>
+        <p><strong>Pick Your Toppings (Select all that apply)</strong></p>
         <ul>
           <li>
             <input id="lettuce" name="toppings" type="checkbox" value="Lettuce" />
@@ -71,14 +89,17 @@ document.getElementById("app").innerHTML = `
 </div>
 `;
 
+// .join takes the array and brings them together //
+
 const displayOrders = () => {
     const orders = getOrders()
     let html = ''
     for (let order of orders) {
       html += `<div>
       <h4>Order #: ${order.id}</h4>
-      <p>Bread: ${order.bread}</p>
+      <p>Bread: ${order.bread} (${order.toasted})</p>
       <p>Protein: ${order.protein}</p>
+      <p>Cheese: ${order.cheese}</p>
       <p>Toppings: ${order.toppings.join(", ")}</p>
       </div>`;
     }
@@ -91,6 +112,10 @@ document.addEventListener("click", (e) => {
     if (e.target.id === "submitOrder") {
       const bread = document.querySelector("input[name=bread]:checked")?.value;
 
+      const toasted = document.querySelector("input[name=toasted]:checked")?.value;
+
+      const cheese = document.querySelector("input[name=cheese]:checked")?.value;
+
       const protein = document.querySelector("input[name=protein]:checked")?.value;
 
       const toppingsElements = document.querySelectorAll("input[name=toppings]:checked");
@@ -102,7 +127,9 @@ document.addEventListener("click", (e) => {
 
       const newOrder = {
         bread: bread,
+        toasted: toasted,
         protein: protein,
+        cheese: cheese,
         toppings: toppingsArray
       };
       
